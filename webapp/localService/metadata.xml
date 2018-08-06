@@ -1,0 +1,683 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:DataServices
+        xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
+        <Schema
+            xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+            xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="Connected.app">
+            <EntityType Name="VEHICLE_VIEWType">
+                <Key>
+                    <PropertyRef Name="VIN"/>
+                    <PropertyRef Name="EMAIL"/>
+                </Key>
+                <Property Name="VIN" Type="Edm.String" Nullable="false" MaxLength="17"/>
+                <Property Name="LIC_PLATE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="MAKE" Type="Edm.String" MaxLength="30"/>
+                <Property Name="MODEL" Type="Edm.String" MaxLength="30"/>
+                <Property Name="SUBMODEL" Type="Edm.String" MaxLength="30"/>
+                <Property Name="MODEL_YEAR" Type="Edm.Int32"/>
+                <Property Name="COLOUR" Type="Edm.String" MaxLength="20"/>
+                <Property Name="DEVICE_ID" Type="Edm.Int64"/>
+                <Property Name="MOTOR_CM3" Type="Edm.Int32"/>
+                <Property Name="HP" Type="Edm.Int32"/>
+                <Property Name="TORK_NM" Type="Edm.Int32"/>
+                <Property Name="FUEL_TYPE" Type="Edm.String" MaxLength="20"/>
+                <Property Name="FUEL_TANK" Type="Edm.Int32"/>
+                <Property Name="GAS_CITY" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="GAS_AVG" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="GAS_HWY" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="EMAIL" Type="Edm.String" Nullable="false" MaxLength="100"/>
+                <Property Name="PHONE" Type="Edm.String" MaxLength="20"/>
+                <Property Name="CELLPHONE" Type="Edm.String" MaxLength="20"/>
+                <Property Name="FIRSTNAME" Type="Edm.String" MaxLength="50"/>
+                <Property Name="LASTNAME" Type="Edm.String" MaxLength="50"/>
+                <Property Name="PROPIETARIO" Type="Edm.String" MaxLength="50"/>
+                <NavigationProperty Name="TRIP_VIEW" Relationship="Connected.app.VEHICLE_VIEW_TRIP_VIEWType" FromRole="VEHICLE_VIEWPrincipal" ToRole="TRIP_VIEWDependent"/>
+                <NavigationProperty Name="TELEMETRY_VIEW" Relationship="Connected.app.VEHICLE_VIEW_TELEMETRY_VIEWType" FromRole="VEHICLE_VIEWPrincipal" ToRole="TELEMETRY_VIEWDependent"/>
+                <NavigationProperty Name="FAILURE_VIEW" Relationship="Connected.app.VEHICLE_VIEW_FAILURE_VIEWType" FromRole="VEHICLE_VIEWPrincipal" ToRole="FAILURE_VIEWDependent"/>
+                <NavigationProperty Name="CONSUMPTION_VIEW_NP" Relationship="Connected.app.VEHICLE_VIEW_CONSUMPTION_VIEW_NPType" FromRole="VEHICLE_VIEWPrincipal" ToRole="CONSUMPTION_VIEW_NPDependent"/>
+                <NavigationProperty Name="DRIVER_VIEW" Relationship="Connected.app.VEHICLE_VIEW_DRIVER_VIEWType" FromRole="VEHICLE_VIEWPrincipal" ToRole="DRIVER_VIEWDependent"/>
+                <NavigationProperty Name="P_ALARM_SETTING" Relationship="Connected.app.VEHICLE_VIEW_P_ALARM_SETTINGType" FromRole="VEHICLE_VIEWPrincipal" ToRole="P_ALARM_SETTINGDependent"/>
+            </EntityType>
+            <EntityType Name="TRIP_VIEWType">
+                <Key>
+                    <PropertyRef Name="TRIP_ID"/>
+                </Key>
+                <Property Name="TRIP_ID" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="VIN" Type="Edm.String" MaxLength="17"/>
+                <Property Name="START_TIME" Type="Edm.DateTime"/>
+                <Property Name="END_TIME" Type="Edm.DateTime"/>
+                <Property Name="MILEAGE" Type="Edm.Decimal" Precision="10" Scale="2"/>
+                <Property Name="IDDLE_MINUTE" Type="Edm.Decimal" Precision="10" Scale="2"/>
+                <Property Name="MAX_RPM" Type="Edm.Int32"/>
+                <Property Name="MAX_SPEED" Type="Edm.Int16"/>
+                <Property Name="AVG_SPEED" Type="Edm.Int16"/>
+                <Property Name="MIN_BATTERY" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="MAX_BATTERY" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="MAX_WATER_TEMP" Type="Edm.Int16"/>
+                <Property Name="MAX_PRESS_ADM" Type="Edm.Int16"/>
+                <Property Name="MAX_AIR_TEMP" Type="Edm.Int16"/>
+                <Property Name="AVG_BAROMETRIC_PRESS" Type="Edm.Decimal" Precision="7" Scale="2"/>
+                <Property Name="GAS_AVG" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="FUEL_USED" Type="Edm.Int64"/>
+                <Property Name="FUEL_ALGORITHM" Type="Edm.Byte"/>
+                <Property Name="MOTOR_CM3" Type="Edm.Int32"/>
+                <Property Name="VOL_EFF" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="FUEL_TYPE" Type="Edm.String" MaxLength="20"/>
+                <Property Name="CO2" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="DURATION" Type="Edm.Int32"/>
+                <Property Name="CONSUMPTION_LTS" Type="Edm.Decimal" Precision="6" Scale="2"/>
+                <Property Name="CONSUMPTION_LTSX100KM" Type="Edm.Decimal" Precision="6" Scale="2"/>
+                <Property Name="CO2_KG" Type="Edm.Decimal" Precision="5" Scale="2"/>
+            </EntityType>
+            <EntityType Name="DRIVER_VIEWType">
+                <Key>
+                    <PropertyRef Name="DRIVER_ID"/>
+                </Key>
+                <Property Name="DRIVER_ID" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="VIN" Type="Edm.String" MaxLength="17"/>
+                <Property Name="FIRSTNAME" Type="Edm.String" MaxLength="50"/>
+                <Property Name="LASTNAME" Type="Edm.String" MaxLength="50"/>
+                <Property Name="EMAIL" Type="Edm.String" MaxLength="100"/>
+                <Property Name="PHONE" Type="Edm.String" MaxLength="20"/>
+                <Property Name="CELLPHONE" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ADDRESS" Type="Edm.String" MaxLength="80"/>
+                <Property Name="CITY" Type="Edm.String" MaxLength="80"/>
+                <Property Name="STATE" Type="Edm.String" MaxLength="30"/>
+                <Property Name="ZIPCODE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="OBSERVATION" Type="Edm.String" MaxLength="255"/>
+            </EntityType>
+            <EntityType Name="FAILURE_VIEWType">
+                <Key>
+                    <PropertyRef Name="VIN"/>
+                    <PropertyRef Name="DATE"/>
+                    <PropertyRef Name="PCODE"/>
+                </Key>
+                <Property Name="VIN" Type="Edm.String" Nullable="false" MaxLength="17"/>
+                <Property Name="DATE" Type="Edm.DateTime" Nullable="false"/>
+                <Property Name="PCODE" Type="Edm.String" Nullable="false" MaxLength="5"/>
+                <Property Name="DEACTIVATION_DATE" Type="Edm.DateTime"/>
+                <Property Name="STATUS" Type="Edm.String" MaxLength="10"/>
+                <Property Name="TYPE" Type="Edm.String" MaxLength="15"/>
+                <Property Name="DESCRIPTION" Type="Edm.String" MaxLength="300"/>
+            </EntityType>
+            <EntityType Name="TELEMETRY_VIEWType">
+                <Key>
+                    <PropertyRef Name="VIN"/>
+                </Key>
+                <Property Name="VIN" Type="Edm.String" Nullable="false" MaxLength="17"/>
+                <Property Name="VEHICLE_TYPE" Type="Edm.String" MaxLength="20"/>
+                <Property Name="FUEL_TYPE" Type="Edm.String" MaxLength="20"/>
+                <Property Name="FUEL_TANK" Type="Edm.Int32"/>
+                <Property Name="BATTERY" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="DEVICE_TEMP" Type="Edm.Decimal" Precision="4" Scale="2"/>
+                <Property Name="DEVICE_BATTERY" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="LAST_LATITUDE" Type="Edm.String" MaxLength="11"/>
+                <Property Name="LAST_LONGITUDE" Type="Edm.String" MaxLength="11"/>
+                <Property Name="MILEAGE" Type="Edm.Int64"/>
+                <Property Name="FAILURES" Type="Edm.String" MaxLength="50"/>
+                <Property Name="IN_TRAVEL" Type="Edm.Byte"/>
+                <Property Name="DATE" Type="Edm.DateTime"/>
+                <Property Name="LAST_OBD" Type="Edm.DateTime"/>
+                <Property Name="FUEL_LEVEL" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="FUEL_MEASURE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="RPM" Type="Edm.Int32"/>
+                <Property Name="SPEED" Type="Edm.Int16"/>
+                <Property Name="WATER_TEMP" Type="Edm.Int16"/>
+                <Property Name="PRESS_ADMISSION" Type="Edm.Int16"/>
+                <Property Name="OIL_TEMP" Type="Edm.Int16"/>
+                <Property Name="OIL_PRESS" Type="Edm.Int32"/>
+                <Property Name="ODOLITER" Type="Edm.Int64"/>
+            </EntityType>
+            <EntityType Name="CONSUMPTION_VIEWType" sap:semantics="aggregate">
+                <Key>
+                    <PropertyRef Name="EMAIL_FILTER"/>
+                    <PropertyRef Name="VIN"/>
+                </Key>
+                <Property Name="EMAIL_FILTER" Type="Edm.String" Nullable="false" DefaultValue="null" MaxLength="100"/>
+                <Property Name="EMAIL" Type="Edm.String" MaxLength="100" sap:label="EMAIL" sap:aggregation-role="dimension"/>
+                <Property Name="VIN" Type="Edm.String" Nullable="false" MaxLength="17" sap:label="VIN" sap:aggregation-role="dimension"/>
+                <Property Name="LIC_PLATE" Type="Edm.String" MaxLength="10" sap:label="LIC_PLATE" sap:aggregation-role="dimension"/>
+                <Property Name="TYPE" Type="Edm.String" MaxLength="20" sap:label="TYPE" sap:aggregation-role="dimension"/>
+                <Property Name="MAKE" Type="Edm.String" MaxLength="30" sap:label="MAKE" sap:aggregation-role="dimension"/>
+                <Property Name="MODEL" Type="Edm.String" MaxLength="30" sap:label="MODEL" sap:aggregation-role="dimension"/>
+                <Property Name="FUEL_TYPE" Type="Edm.String" MaxLength="20" sap:label="FUEL_TYPE" sap:aggregation-role="dimension"/>
+                <Property Name="FUEL_TANK" Type="Edm.Int32" sap:label="FUEL_TANK" sap:aggregation-role="dimension"/>
+                <Property Name="SUBMODEL" Type="Edm.String" MaxLength="30" sap:label="SUBMODEL" sap:aggregation-role="dimension"/>
+                <Property Name="MILEAGE" Type="Edm.Int64" sap:label="MILEAGE" sap:aggregation-role="dimension"/>
+                <Property Name="FAILURES" Type="Edm.String" MaxLength="50" sap:label="FAILURES" sap:aggregation-role="dimension"/>
+                <Property Name="FUEL_LEVEL" Type="Edm.Decimal" Precision="5" Scale="2" sap:label="FUEL_LEVEL" sap:aggregation-role="dimension"/>
+                <Property Name="FUEL_MEASURE" Type="Edm.String" MaxLength="10" sap:label="FUEL_TYPE" sap:aggregation-role="dimension"/>
+                <Property Name="GAS_AVG" Type="Edm.Decimal" Precision="5" Scale="2" sap:label="GAS_AVG" sap:aggregation-role="dimension"/>
+                <Property Name="IDDLE_PERCENT" Type="Edm.Int32" sap:label="IDDLE_PERCENT" sap:aggregation-role="dimension"/>
+                <Property Name="AVG_CONSUMPTION_100" Type="Edm.Decimal" Precision="7" Scale="2" sap:label="AVG_CONSUMPTION_100" sap:aggregation-role="dimension"/>
+                <Property Name="KM" Type="Edm.Decimal" Precision="10" Scale="2" sap:filterable="false" sap:label="MILEAGE" sap:aggregation-role="measure"/>
+                <Property Name="DURATION" Type="Edm.Int32" sap:filterable="false" sap:label="DURATION" sap:aggregation-role="measure"/>
+                <Property Name="CO2_KG" Type="Edm.Decimal" Precision="5" Scale="2" sap:filterable="false" sap:label="CO2_KG" sap:aggregation-role="measure"/>
+                <Property Name="MAX_RPM" Type="Edm.Int32" sap:filterable="false" sap:label="MAX_RPM" sap:aggregation-role="measure"/>
+                <Property Name="MAX_SPEED" Type="Edm.Int16" sap:filterable="false" sap:label="MAX_SPEED" sap:aggregation-role="measure"/>
+                <Property Name="AVG_SPEED" Type="Edm.Int16" sap:filterable="false" sap:label="AVG_SPEED" sap:aggregation-role="measure"/>
+                <Property Name="MIN_BATTERY" Type="Edm.Decimal" Precision="5" Scale="2" sap:filterable="false" sap:label="MIN_BATTERY" sap:aggregation-role="measure"/>
+                <Property Name="MAX_BATTERY" Type="Edm.Decimal" Precision="5" Scale="2" sap:filterable="false" sap:label="MAX_BATTERY" sap:aggregation-role="measure"/>
+                <Property Name="MAX_WATER_TEMP" Type="Edm.Int16" sap:filterable="false" sap:label="MAX_WATER_TEMP" sap:aggregation-role="measure"/>
+                <Property Name="MAX_PRESS_ADM" Type="Edm.Int16" sap:filterable="false" sap:label="MAX_PRESS_ADM" sap:aggregation-role="measure"/>
+                <Property Name="MAX_AIR_TEMP" Type="Edm.Int16" sap:filterable="false" sap:label="MAX_AIR_TEMP" sap:aggregation-role="measure"/>
+                <Property Name="AVG_BAROMETRIC_PRESS" Type="Edm.Decimal" Precision="7" Scale="2" sap:filterable="false" sap:label="AVG_BAROMETRIC_PRESS" sap:aggregation-role="measure"/>
+            </EntityType>
+            <EntityType Name="CONSUMPTIONType" sap:semantics="parameters">
+                <Key>
+                    <PropertyRef Name="EMAIL_FILTER"/>
+                </Key>
+                <Property Name="EMAIL_FILTER" Type="Edm.String" Nullable="false" DefaultValue="null" MaxLength="100" sap:label="EMAIL_FILTER" sap:parameter="mandatory"/>
+                <NavigationProperty Name="Execute" Relationship="Connected.app.CONSUMPTION_CONSUMPTION_VIEWType" FromRole="CONSUMPTIONPrincipal" ToRole="CONSUMPTION_VIEWDependent"/>
+            </EntityType>
+            <EntityType Name="CONSUMPTION_VIEW_NPType">
+                <Key>
+                    <PropertyRef Name="VIN"/>
+                </Key>
+                <Property Name="EMAIL" Type="Edm.String" MaxLength="100" sap:label="EMAIL"/>
+                <Property Name="VIN" Type="Edm.String" Nullable="false" MaxLength="17" sap:label="VIN"/>
+                <Property Name="LIC_PLATE" Type="Edm.String" MaxLength="10" sap:label="LIC_PLATE"/>
+                <Property Name="TYPE" Type="Edm.String" MaxLength="20" sap:label="TYPE"/>
+                <Property Name="MAKE" Type="Edm.String" MaxLength="30" sap:label="MAKE"/>
+                <Property Name="MODEL" Type="Edm.String" MaxLength="30" sap:label="MODEL"/>
+                <Property Name="FUEL_TYPE" Type="Edm.String" MaxLength="20" sap:label="FUEL_TYPE"/>
+                <Property Name="FUEL_TANK" Type="Edm.Int32" sap:label="FUEL_TANK"/>
+                <Property Name="SUBMODEL" Type="Edm.String" MaxLength="30" sap:label="SUBMODEL"/>
+                <Property Name="MILEAGE" Type="Edm.Int64" sap:label="MILEAGE"/>
+                <Property Name="FAILURES" Type="Edm.String" MaxLength="50" sap:label="FAILURES"/>
+                <Property Name="FUEL_LEVEL" Type="Edm.Decimal" Precision="5" Scale="2" sap:label="FUEL_LEVEL"/>
+                <Property Name="FUEL_MEASURE" Type="Edm.String" MaxLength="10" sap:label="FUEL_TYPE"/>
+                <Property Name="GAS_AVG" Type="Edm.Decimal" Precision="5" Scale="2" sap:label="GAS_AVG"/>
+                <Property Name="IDDLE_PERCENT" Type="Edm.Int32" sap:label="IDDLE_PERCENT"/>
+                <Property Name="AVG_CONSUMPTION_100" Type="Edm.Decimal" Precision="7" Scale="2" sap:label="AVG_CONSUMPTION_100"/>
+                <Property Name="KM" Type="Edm.Decimal" Precision="10" Scale="2" sap:label="MILEAGE"/>
+                <Property Name="DURATION" Type="Edm.Int32" sap:label="DURATION"/>
+                <Property Name="CO2_KG" Type="Edm.Decimal" Precision="5" Scale="2" sap:label="CO2_KG"/>
+                <Property Name="MAX_RPM" Type="Edm.Int32" sap:label="MAX_RPM"/>
+                <Property Name="MAX_SPEED" Type="Edm.Int16" sap:label="MAX_SPEED"/>
+                <Property Name="AVG_SPEED" Type="Edm.Int16" sap:label="AVG_SPEED"/>
+                <Property Name="MIN_BATTERY" Type="Edm.Decimal" Precision="5" Scale="2" sap:label="MIN_BATTERY"/>
+                <Property Name="MAX_BATTERY" Type="Edm.Decimal" Precision="5" Scale="2" sap:label="MAX_BATTERY"/>
+                <Property Name="MAX_WATER_TEMP" Type="Edm.Int16" sap:label="MAX_WATER_TEMP"/>
+                <Property Name="MAX_PRESS_ADM" Type="Edm.Int16" sap:label="MAX_PRESS_ADM"/>
+                <Property Name="MAX_AIR_TEMP" Type="Edm.Int16" sap:label="MAX_AIR_TEMP"/>
+                <Property Name="AVG_BAROMETRIC_PRESS" Type="Edm.Decimal" Precision="7" Scale="2" sap:label="AVG_BAROMETRIC_PRESS"/>
+            </EntityType>
+            <EntityType Name="OBD_GPS_VIEWType">
+                <Key>
+                    <PropertyRef Name="VIN_FILTER"/>
+                    <PropertyRef Name="STARTTIME"/>
+                    <PropertyRef Name="ENDTIME"/>
+                    <PropertyRef Name="VIN"/>
+                    <PropertyRef Name="DATE"/>
+                </Key>
+                <Property Name="VIN_FILTER" Type="Edm.String" Nullable="false" MaxLength="17"/>
+                <Property Name="STARTTIME" Type="Edm.DateTime" Nullable="false"/>
+                <Property Name="ENDTIME" Type="Edm.DateTime" Nullable="false"/>
+                <Property Name="VIN" Type="Edm.String" Nullable="false" MaxLength="17" sap:label="VIN"/>
+                <Property Name="DATE" Type="Edm.DateTime" Nullable="false" sap:label="DATE"/>
+                <Property Name="FUEL_TYPE" Type="Edm.String" MaxLength="15" sap:label="FUEL_TYPE"/>
+                <Property Name="FUEL_LEVEL" Type="Edm.Decimal" Precision="6" Scale="2" sap:label="FUEL_LEVEL"/>
+                <Property Name="BATTERY" Type="Edm.Decimal" Precision="5" Scale="2" sap:label="BATTERY"/>
+                <Property Name="RPM" Type="Edm.Int32" sap:label="RPM"/>
+                <Property Name="SPEED_OBD" Type="Edm.Int16" sap:label="SPEED_OBD"/>
+                <Property Name="WATER_TEMP" Type="Edm.Int16" sap:label="WATER_TEMP"/>
+                <Property Name="PRESS_ADMISSION" Type="Edm.Int16" sap:label="PRESS_ADMISSION"/>
+                <Property Name="ACCELERATOR_POS" Type="Edm.Int16" sap:label="ACCELERATOR_POS"/>
+                <Property Name="AIR_TEMP" Type="Edm.Int16" sap:label="AIR_TEMP"/>
+                <Property Name="LATITUDE" Type="Edm.Decimal" Precision="10" Scale="6" sap:label="LATITUDE"/>
+                <Property Name="LONGITUDE" Type="Edm.Decimal" Precision="10" Scale="6" sap:label="LONGITUDE"/>
+                <Property Name="SPEED_GPS" Type="Edm.Int16" sap:label="SPEED"/>
+                <Property Name="ANGLE" Type="Edm.Int16" sap:label="ANGLE"/>
+                <Property Name="HDOP" Type="Edm.Decimal" Precision="4" Scale="2" sap:label="HDOP"/>
+                <Property Name="IN_TRAVEL" Type="Edm.Byte" sap:label="IN_TRAVEL"/>
+                <Property Name="STATUS" Type="Edm.String" MaxLength="4" sap:label="STATUS"/>
+                <Property Name="MEASURE" Type="Edm.Decimal" Precision="18" Scale="0" sap:label="VIN"/>
+            </EntityType>
+            <EntityType Name="OBDGPSType" sap:semantics="parameters">
+                <Key>
+                    <PropertyRef Name="VIN_FILTER"/>
+                    <PropertyRef Name="STARTTIME"/>
+                    <PropertyRef Name="ENDTIME"/>
+                </Key>
+                <Property Name="VIN_FILTER" Type="Edm.String" Nullable="false" MaxLength="17" sap:label="VIN_FILTER" sap:parameter="mandatory"/>
+                <Property Name="STARTTIME" Type="Edm.DateTime" Nullable="false" sap:label="STARTTIME" sap:parameter="mandatory"/>
+                <Property Name="ENDTIME" Type="Edm.DateTime" Nullable="false" sap:label="ENDTIME" sap:parameter="mandatory"/>
+                <NavigationProperty Name="Execute" Relationship="Connected.app.OBDGPS_OBD_GPS_VIEWType" FromRole="OBDGPSPrincipal" ToRole="OBD_GPS_VIEWDependent"/>
+            </EntityType>
+            <EntityType Name="VEHICLE_VIEW_WPType">
+                <Key>
+                    <PropertyRef Name="EMAIL_FILTER"/>
+                    <PropertyRef Name="VIN"/>
+                </Key>
+                <Property Name="EMAIL_FILTER" Type="Edm.String" Nullable="false" MaxLength="100"/>
+                <Property Name="VIN" Type="Edm.String" Nullable="false" MaxLength="17" sap:label="VIN"/>
+                <Property Name="LIC_PLATE" Type="Edm.String" MaxLength="10" sap:label="LIC_PLATE"/>
+                <Property Name="MAKE" Type="Edm.String" MaxLength="30" sap:label="MAKE"/>
+                <Property Name="MODEL" Type="Edm.String" MaxLength="30" sap:label="MODEL"/>
+                <Property Name="SUBMODEL" Type="Edm.String" MaxLength="30" sap:label="SUBMODEL"/>
+                <Property Name="MODEL_YEAR" Type="Edm.Int32" sap:label="MODEL_YEAR"/>
+                <Property Name="COLOUR" Type="Edm.String" MaxLength="20" sap:label="COLOUR"/>
+                <Property Name="DEVICE_ID" Type="Edm.Int64" sap:label="DEVICE_ID"/>
+                <Property Name="MOTOR_CM3" Type="Edm.Int32" sap:label="MOTOR_CM3"/>
+                <Property Name="HP" Type="Edm.Int32" sap:label="HP"/>
+                <Property Name="TORK_NM" Type="Edm.Int32" sap:label="TORK_NM"/>
+                <Property Name="FUEL_TYPE" Type="Edm.String" MaxLength="20" sap:label="FUEL_TYPE"/>
+                <Property Name="FUEL_TANK" Type="Edm.Int32" sap:label="FUEL_TANK"/>
+                <Property Name="GAS_CITY" Type="Edm.Decimal" Precision="5" Scale="2" sap:label="GAS_CITY"/>
+                <Property Name="GAS_AVG" Type="Edm.Decimal" Precision="5" Scale="2" sap:label="GAS_AVG"/>
+                <Property Name="GAS_HWY" Type="Edm.Decimal" Precision="5" Scale="2" sap:label="GAS_HWY"/>
+                <Property Name="EMAIL" Type="Edm.String" MaxLength="100" sap:label="EMAIL"/>
+                <Property Name="PROPIETARIO" Type="Edm.String" MaxLength="50" sap:label="PROPIETARIO"/>
+                <Property Name="PHONE" Type="Edm.String" MaxLength="20" sap:label="PHONE"/>
+                <Property Name="CELLPHONE" Type="Edm.String" MaxLength="20" sap:label="CELLPHONE"/>
+                <Property Name="MEASURE" Type="Edm.String" MaxLength="50" sap:label="MEASURE"/>
+            </EntityType>
+            <EntityType Name="VEHICLEType" sap:semantics="parameters">
+                <Key>
+                    <PropertyRef Name="EMAIL_FILTER"/>
+                </Key>
+                <Property Name="EMAIL_FILTER" Type="Edm.String" Nullable="false" MaxLength="100" sap:label="EMAIL_FILTER" sap:parameter="mandatory"/>
+                <NavigationProperty Name="Execute" Relationship="Connected.app.VEHICLE_VEHICLE_VIEW_WPType" FromRole="VEHICLEPrincipal" ToRole="VEHICLE_VIEW_WPDependent"/>
+            </EntityType>
+            <EntityType Name="KPI_VIEWType" sap:semantics="aggregate">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="2147483647" sap:filterable="false"/>
+                <Property Name="VIN" Type="Edm.String" MaxLength="17" sap:label="VIN" sap:aggregation-role="dimension"/>
+                <Property Name="MARCA" Type="Edm.String" MaxLength="30" sap:label="MARCA" sap:aggregation-role="dimension"/>
+                <Property Name="TIPO" Type="Edm.String" MaxLength="20" sap:label="TIPO" sap:aggregation-role="dimension"/>
+                <Property Name="MODELO" Type="Edm.String" MaxLength="30" sap:label="MODELO" sap:aggregation-role="dimension"/>
+                <Property Name="SUBMODELO" Type="Edm.String" MaxLength="30" sap:label="SUBMODELO" sap:aggregation-role="dimension"/>
+                <Property Name="TIPOCOMBUSTIBLE" Type="Edm.String" MaxLength="10" sap:label="TIPOCOMBUSTIBLE" sap:aggregation-role="dimension"/>
+                <Property Name="MOTOR_CODIGO" Type="Edm.String" MaxLength="20" sap:label="MOTOR_CODIGO" sap:aggregation-role="dimension"/>
+                <Property Name="TANQUE_LTS" Type="Edm.Int16" sap:label="TANQUE_LTS" sap:aggregation-role="dimension"/>
+                <Property Name="MOTOR_CM3" Type="Edm.Int16" sap:label="MOTOR_CM3" sap:aggregation-role="dimension"/>
+                <Property Name="POTENCIA_HP" Type="Edm.Int16" sap:label="POTENCIA_HP" sap:aggregation-role="dimension"/>
+                <Property Name="TORQUE_NM" Type="Edm.Int16" sap:label="TORQUE_NM" sap:aggregation-role="dimension"/>
+                <Property Name="PATENTE" Type="Edm.String" MaxLength="9" sap:label="PATENTE" sap:aggregation-role="dimension"/>
+                <Property Name="COLOR" Type="Edm.String" MaxLength="30" sap:label="COLOR" sap:aggregation-role="dimension"/>
+                <Property Name="OBSERVACIONES" Type="Edm.String" MaxLength="100" sap:label="OBSERVACIONES" sap:aggregation-role="dimension"/>
+                <Property Name="ANO_FABRICACION" Type="Edm.Int16" sap:label="ANO_FABRICACION" sap:aggregation-role="dimension"/>
+                <Property Name="DEVICEID" Type="Edm.Int64" sap:label="DEVICEID" sap:aggregation-role="dimension"/>
+                <Property Name="VOLUM_EFICIENCY" Type="Edm.Decimal" Precision="5" Scale="2" sap:label="VOLUM_EFICIENCY" sap:aggregation-role="dimension"/>
+                <Property Name="EMAILFLOTA" Type="Edm.String" MaxLength="50" sap:label="EMAILFLOTA" sap:aggregation-role="dimension"/>
+                <Property Name="CONSUMOMIXTO_LXK" Type="Edm.Decimal" Precision="5" Scale="2" sap:label="CONSUMOMIXTO_LXK" sap:aggregation-role="dimension"/>
+                <Property Name="CONSUMOURBANO_LXK" Type="Edm.Decimal" Precision="5" Scale="2" sap:label="CONSUMOURBANO_LXK" sap:aggregation-role="dimension"/>
+                <Property Name="CONSUMOEXTRA_LXK" Type="Edm.Decimal" Precision="5" Scale="2" sap:label="CONSUMOEXTRA_LXK" sap:aggregation-role="dimension"/>
+                <Property Name="CO2_LTS" Type="Edm.Decimal" Precision="5" Scale="2" sap:label="CO2_LTS" sap:aggregation-role="dimension"/>
+                <Property Name="MILEAGE" Type="Edm.Int64" sap:label="MILEAGE" sap:aggregation-role="dimension"/>
+                <Property Name="TRIPID" Type="Edm.Int64" sap:filterable="false" sap:label="TRIPID" sap:aggregation-role="measure"/>
+                <Property Name="KM" Type="Edm.Decimal" Precision="8" Scale="2" sap:filterable="false" sap:label="KM" sap:aggregation-role="measure"/>
+                <Property Name="MAXSPEED" Type="Edm.Int32" sap:filterable="false" sap:label="MAXSPEED" sap:aggregation-role="measure"/>
+                <Property Name="MAXRPM" Type="Edm.Int32" sap:filterable="false" sap:label="MAXRPM" sap:aggregation-role="measure"/>
+                <Property Name="MAXTEMPAGUA" Type="Edm.Int16" sap:filterable="false" sap:label="MAXTEMPAGUA" sap:aggregation-role="measure"/>
+                <Property Name="IDDLEMINUTE" Type="Edm.Decimal" Precision="6" Scale="2" sap:filterable="false" sap:label="IDDLEMINUTE" sap:aggregation-role="measure"/>
+            </EntityType>
+            <EntityType Name="P_COMPANYType">
+                <Key>
+                    <PropertyRef Name="COMPANY_ID"/>
+                </Key>
+                <Property Name="COMPANY_ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="NAME" Type="Edm.String" Nullable="false" MaxLength="50"/>
+                <Property Name="CITY" Type="Edm.String" MaxLength="30"/>
+                <Property Name="STATE" Type="Edm.String" MaxLength="30"/>
+                <Property Name="COUNTRY" Type="Edm.String" MaxLength="30"/>
+                <Property Name="ADDRESS" Type="Edm.String" MaxLength="50"/>
+                <Property Name="ZIPCODE" Type="Edm.String" MaxLength="20"/>
+            </EntityType>
+            <EntityType Name="P_CONNECTIONType">
+                <Key>
+                    <PropertyRef Name="DEVICE_ID"/>
+                    <PropertyRef Name="DATE"/>
+                </Key>
+                <Property Name="DEVICE_ID" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="DATE" Type="Edm.DateTime" Nullable="false"/>
+                <Property Name="STATUS" Type="Edm.String" Nullable="false" MaxLength="20"/>
+            </EntityType>
+            <EntityType Name="P_DEALERSHIPType">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="NAME" Type="Edm.String" MaxLength="50"/>
+                <Property Name="EMAIL" Type="Edm.String" MaxLength="50"/>
+                <Property Name="PHONE" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ADDRESS" Type="Edm.String" MaxLength="50"/>
+                <Property Name="CITY" Type="Edm.String" MaxLength="30"/>
+                <Property Name="STATE" Type="Edm.String" MaxLength="30"/>
+                <Property Name="COUNTRY" Type="Edm.String" MaxLength="30"/>
+                <Property Name="ZIPCODE" Type="Edm.String" MaxLength="20"/>
+                <Property Name="COMPANY_ID" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="P_DEVICEType">
+                <Key>
+                    <PropertyRef Name="DEVICE_ID"/>
+                </Key>
+                <Property Name="DEVICE_ID" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="VIN" Type="Edm.String" MaxLength="17"/>
+                <Property Name="DATE" Type="Edm.DateTime"/>
+                <Property Name="BATTERY" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="DEVICE_TEMP" Type="Edm.Decimal" Precision="4" Scale="2"/>
+                <Property Name="DEVICE_BATTERY" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="LAST_LATITUDE" Type="Edm.String" MaxLength="11"/>
+                <Property Name="LAST_LONGITUDE" Type="Edm.String" MaxLength="11"/>
+                <Property Name="MILEAGE" Type="Edm.Int64"/>
+                <Property Name="FAILURES" Type="Edm.String" MaxLength="50"/>
+                <Property Name="IN_TRAVEL" Type="Edm.Byte"/>
+                <Property Name="LAST_OBD" Type="Edm.DateTime"/>
+                <Property Name="DEVICE_PHONE" Type="Edm.String" MaxLength="20"/>
+                <Property Name="FUEL_LEVEL" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="FUEL_TYPE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="CONNECTED" Type="Edm.Byte"/>
+                <Property Name="METERS" Type="Edm.Int64"/>
+            </EntityType>
+            <EntityType Name="P_DRIVERType">
+                <Key>
+                    <PropertyRef Name="DRIVER_ID"/>
+                </Key>
+                <Property Name="DRIVER_ID" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="FIRSTNAME" Type="Edm.String" Nullable="false" MaxLength="50"/>
+                <Property Name="LASTNAME" Type="Edm.String" Nullable="false" MaxLength="50"/>
+                <Property Name="EMAIL" Type="Edm.String" Nullable="false" MaxLength="100"/>
+                <Property Name="PHONE" Type="Edm.String" MaxLength="20"/>
+                <Property Name="CELLPHONE" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ADDRESS" Type="Edm.String" MaxLength="80"/>
+                <Property Name="CITY" Type="Edm.String" MaxLength="80"/>
+                <Property Name="STATE" Type="Edm.String" MaxLength="30"/>
+                <Property Name="ZIPCODE" Type="Edm.String" MaxLength="10"/>
+                <Property Name="OBSERVATION" Type="Edm.String" MaxLength="255"/>
+            </EntityType>
+            <EntityType Name="P_DRIVER_VEHICLEType">
+                <Key>
+                    <PropertyRef Name="VIN"/>
+                    <PropertyRef Name="DRIVER_ID"/>
+                </Key>
+                <Property Name="VIN" Type="Edm.String" Nullable="false" MaxLength="17"/>
+                <Property Name="DRIVER_ID" Type="Edm.Int64" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="P_FAILUREType">
+                <Key>
+                    <PropertyRef Name="VIN"/>
+                    <PropertyRef Name="DATE"/>
+                    <PropertyRef Name="PCODE"/>
+                </Key>
+                <Property Name="VIN" Type="Edm.String" Nullable="false" MaxLength="17"/>
+                <Property Name="DATE" Type="Edm.DateTime" Nullable="false"/>
+                <Property Name="PCODE" Type="Edm.String" Nullable="false" MaxLength="5"/>
+                <Property Name="DEACTIVATION_DATE" Type="Edm.DateTime"/>
+                <Property Name="STATUS" Type="Edm.String" MaxLength="10"/>
+                <Property Name="TYPE" Type="Edm.String" MaxLength="15"/>
+            </EntityType>
+            <EntityType Name="P_FAILURE_DESCType">
+                <Key>
+                    <PropertyRef Name="PCODE"/>
+                </Key>
+                <Property Name="PCODE" Type="Edm.String" Nullable="false" MaxLength="5"/>
+                <Property Name="DESCRIPTION" Type="Edm.String" Nullable="false" MaxLength="300"/>
+            </EntityType>
+            <EntityType Name="P_GPSType">
+                <Key>
+                    <PropertyRef Name="VIN"/>
+                    <PropertyRef Name="DATE"/>
+                </Key>
+                <Property Name="VIN" Type="Edm.String" Nullable="false" MaxLength="17"/>
+                <Property Name="DATE" Type="Edm.DateTime" Nullable="false"/>
+                <Property Name="LATITUDE" Type="Edm.Decimal" Nullable="false" Precision="10" Scale="6"/>
+                <Property Name="LONGITUDE" Type="Edm.Decimal" Nullable="false" Precision="10" Scale="6"/>
+                <Property Name="SPEED" Type="Edm.Int16"/>
+                <Property Name="ANGLE" Type="Edm.Int16"/>
+                <Property Name="HDOP" Type="Edm.Decimal" Precision="4" Scale="2"/>
+                <Property Name="IN_TRAVEL" Type="Edm.Byte"/>
+                <Property Name="STATUS" Type="Edm.String" MaxLength="4"/>
+            </EntityType>
+            <EntityType Name="P_GROUPType">
+                <Key>
+                    <PropertyRef Name="GROUP_ID"/>
+                </Key>
+                <Property Name="GROUP_ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="DESCRIPTION" Type="Edm.String" Nullable="false" MaxLength="200"/>
+            </EntityType>
+            <EntityType Name="P_MESSAGEType">
+                <Key>
+                    <PropertyRef Name="MESSAGE_ID"/>
+                </Key>
+                <Property Name="MESSAGE_ID" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="DEVICE_ID" Type="Edm.Int64"/>
+                <Property Name="MESSAGE_DATE" Type="Edm.DateTime" Nullable="false"/>
+                <Property Name="TEXT" Type="Edm.String" Nullable="false" MaxLength="500"/>
+                <Property Name="INSERT_DATE" Type="Edm.DateTime"/>
+            </EntityType>
+            <EntityType Name="P_OBDType">
+                <Key>
+                    <PropertyRef Name="VIN"/>
+                    <PropertyRef Name="DATE"/>
+                </Key>
+                <Property Name="VIN" Type="Edm.String" Nullable="false" MaxLength="17"/>
+                <Property Name="DATE" Type="Edm.DateTime" Nullable="false"/>
+                <Property Name="FUEL_CONSUMPTION" Type="Edm.Int64"/>
+                <Property Name="FUEL_ALGORITHM" Type="Edm.Byte"/>
+                <Property Name="FUEL_TYPE" Type="Edm.String" MaxLength="15"/>
+                <Property Name="FUEL_LEVEL" Type="Edm.Decimal" Precision="6" Scale="2"/>
+                <Property Name="BATTERY" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="RPM" Type="Edm.Int32"/>
+                <Property Name="SPEED" Type="Edm.Int16"/>
+                <Property Name="WATER_TEMP" Type="Edm.Int16"/>
+                <Property Name="PRESS_ADMISSION" Type="Edm.Int16"/>
+                <Property Name="ACCELERATOR_POS" Type="Edm.Int16"/>
+                <Property Name="AIR_TEMP" Type="Edm.Int16"/>
+            </EntityType>
+            <EntityType Name="P_OBD_EXTType">
+                <Key>
+                    <PropertyRef Name="VIN"/>
+                    <PropertyRef Name="DATE"/>
+                </Key>
+                <Property Name="VIN" Type="Edm.String" Nullable="false" MaxLength="17"/>
+                <Property Name="DATE" Type="Edm.DateTime" Nullable="false"/>
+                <Property Name="OIL_TEMP" Type="Edm.Int16"/>
+                <Property Name="OIL_PRESS" Type="Edm.Int32"/>
+                <Property Name="ODOLITER" Type="Edm.Int64"/>
+                <Property Name="BAROMETRIC_PRESS" Type="Edm.Int16"/>
+                <Property Name="SENSOR_OXYGEN" Type="Edm.Decimal" Precision="5" Scale="3"/>
+                <Property Name="ENGINE_LOAD" Type="Edm.Int16"/>
+                <Property Name="ENVIRONMENT_TEMP" Type="Edm.Int16"/>
+            </EntityType>
+            <EntityType Name="P_TRIPType">
+                <Key>
+                    <PropertyRef Name="TRIP_ID"/>
+                </Key>
+                <Property Name="TRIP_ID" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="VIN" Type="Edm.String" MaxLength="17"/>
+                <Property Name="START_TIME" Type="Edm.DateTime"/>
+                <Property Name="END_TIME" Type="Edm.DateTime"/>
+                <Property Name="MILEAGE" Type="Edm.Decimal" Precision="10" Scale="2"/>
+                <Property Name="FUEL_USED" Type="Edm.Int64"/>
+                <Property Name="FUEL_ALGORITHM" Type="Edm.Byte"/>
+                <Property Name="IDDLE_MINUTE" Type="Edm.Decimal" Precision="10" Scale="2"/>
+                <Property Name="MAX_RPM" Type="Edm.Int32"/>
+                <Property Name="MAX_SPEED" Type="Edm.Int16"/>
+                <Property Name="AVG_SPEED" Type="Edm.Int16"/>
+                <Property Name="MAX_PRESS_ADM" Type="Edm.Int16"/>
+                <Property Name="MAX_WATER_TEMP" Type="Edm.Int16"/>
+                <Property Name="MAX_AIR_TEMP" Type="Edm.Int16"/>
+                <Property Name="AVG_BAROMETRIC_PRESS" Type="Edm.Decimal" Precision="7" Scale="2"/>
+                <Property Name="MIN_BATTERY" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="MAX_BATTERY" Type="Edm.Decimal" Precision="5" Scale="2"/>
+            </EntityType>
+            <EntityType Name="P_TRIP_AUXType">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="VIN" Type="Edm.String" MaxLength="17"/>
+                <Property Name="DATE" Type="Edm.DateTime"/>
+                <Property Name="START_END" Type="Edm.Byte"/>
+                <Property Name="MILEAGE" Type="Edm.Int64"/>
+            </EntityType>
+            <EntityType Name="P_USERType">
+                <Key>
+                    <PropertyRef Name="USER_ID"/>
+                </Key>
+                <Property Name="USER_ID" Type="Edm.String" Nullable="false" MaxLength="7"/>
+                <Property Name="COMPANY_ID" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="P_USER_GROUPType">
+                <Key>
+                    <PropertyRef Name="USER_ID"/>
+                    <PropertyRef Name="GROUP_ID"/>
+                </Key>
+                <Property Name="USER_ID" Type="Edm.String" Nullable="false" MaxLength="7"/>
+                <Property Name="GROUP_ID" Type="Edm.Int32" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="P_VEHICLE_GROUPType">
+                <Key>
+                    <PropertyRef Name="VIN"/>
+                    <PropertyRef Name="GROUP_ID"/>
+                </Key>
+                <Property Name="VIN" Type="Edm.String" Nullable="false" MaxLength="17"/>
+                <Property Name="GROUP_ID" Type="Edm.Int32" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="P_VEHICLE_TYPEType">
+                <Key>
+                    <PropertyRef Name="TYPE_ID"/>
+                </Key>
+                <Property Name="TYPE_ID" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="TYPE" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="MAKE" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="MODEL" Type="Edm.String" Nullable="false" MaxLength="30"/>
+                <Property Name="SUBMODEL" Type="Edm.String" MaxLength="30"/>
+                <Property Name="FUEL_TYPE" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="FUEL_TANK" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="HP" Type="Edm.Int32"/>
+                <Property Name="MOTOR_CM3" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="TORK_NM" Type="Edm.Int32"/>
+                <Property Name="VOL_EFF" Type="Edm.Decimal" Nullable="false" Precision="5" Scale="2"/>
+                <Property Name="GAS_CITY" Type="Edm.Decimal" Nullable="false" Precision="5" Scale="2"/>
+                <Property Name="GAS_AVG" Type="Edm.Decimal" Nullable="false" Precision="5" Scale="2"/>
+                <Property Name="GAS_HWY" Type="Edm.Decimal" Nullable="false" Precision="5" Scale="2"/>
+                <Property Name="CO2" Type="Edm.Decimal" Nullable="false" Precision="5" Scale="2"/>
+            </EntityType>
+            <EntityType Name="P_ALARM_SETTINGType">
+                <Key>
+                    <PropertyRef Name="VIN"/>
+                </Key>
+                <Property Name="VIN" Type="Edm.String" Nullable="false" MaxLength="17"/>
+                <Property Name="SPEED_ALARM" Type="Edm.Byte" Nullable="false"/>
+                <Property Name="SPEED_VALUE" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="RPM_ALARM" Type="Edm.Byte" Nullable="false"/>
+                <Property Name="RPM_VALUE" Type="Edm.Int32" Nullable="false"/>
+            </EntityType>
+            <Association Name="CONSUMPTION_CONSUMPTION_VIEWType">
+                <End Type="Connected.app.CONSUMPTIONType" Role="CONSUMPTIONPrincipal" Multiplicity="*"/>
+                <End Type="Connected.app.CONSUMPTION_VIEWType" Role="CONSUMPTION_VIEWDependent" Multiplicity="*"/>
+            </Association>
+            <Association Name="OBDGPS_OBD_GPS_VIEWType">
+                <End Type="Connected.app.OBDGPSType" Role="OBDGPSPrincipal" Multiplicity="*"/>
+                <End Type="Connected.app.OBD_GPS_VIEWType" Role="OBD_GPS_VIEWDependent" Multiplicity="*"/>
+            </Association>
+            <Association Name="VEHICLE_VEHICLE_VIEW_WPType">
+                <End Type="Connected.app.VEHICLEType" Role="VEHICLEPrincipal" Multiplicity="*"/>
+                <End Type="Connected.app.VEHICLE_VIEW_WPType" Role="VEHICLE_VIEW_WPDependent" Multiplicity="*"/>
+            </Association>
+            <Association Name="VEHICLE_VIEW_TRIP_VIEWType">
+                <End Type="Connected.app.VEHICLE_VIEWType" Role="VEHICLE_VIEWPrincipal" Multiplicity="1"/>
+                <End Type="Connected.app.TRIP_VIEWType" Role="TRIP_VIEWDependent" Multiplicity="*"/>
+            </Association>
+            <Association Name="VEHICLE_VIEW_TELEMETRY_VIEWType">
+                <End Type="Connected.app.VEHICLE_VIEWType" Role="VEHICLE_VIEWPrincipal" Multiplicity="*"/>
+                <End Type="Connected.app.TELEMETRY_VIEWType" Role="TELEMETRY_VIEWDependent" Multiplicity="1"/>
+            </Association>
+            <Association Name="VEHICLE_VIEW_FAILURE_VIEWType">
+                <End Type="Connected.app.VEHICLE_VIEWType" Role="VEHICLE_VIEWPrincipal" Multiplicity="1"/>
+                <End Type="Connected.app.FAILURE_VIEWType" Role="FAILURE_VIEWDependent" Multiplicity="*"/>
+            </Association>
+            <Association Name="VEHICLE_VIEW_CONSUMPTION_VIEW_NPType">
+                <End Type="Connected.app.VEHICLE_VIEWType" Role="VEHICLE_VIEWPrincipal" Multiplicity="1"/>
+                <End Type="Connected.app.CONSUMPTION_VIEW_NPType" Role="CONSUMPTION_VIEW_NPDependent" Multiplicity="1"/>
+            </Association>
+            <Association Name="VEHICLE_VIEW_DRIVER_VIEWType">
+                <End Type="Connected.app.VEHICLE_VIEWType" Role="VEHICLE_VIEWPrincipal" Multiplicity="1"/>
+                <End Type="Connected.app.DRIVER_VIEWType" Role="DRIVER_VIEWDependent" Multiplicity="*"/>
+            </Association>
+            <Association Name="VEHICLE_VIEW_P_ALARM_SETTINGType">
+                <End Type="Connected.app.VEHICLE_VIEWType" Role="VEHICLE_VIEWPrincipal" Multiplicity="1"/>
+                <End Type="Connected.app.P_ALARM_SETTINGType" Role="P_ALARM_SETTINGDependent" Multiplicity="*"/>
+            </Association>
+            <EntityContainer Name="app" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="VEHICLE_VIEW" EntityType="Connected.app.VEHICLE_VIEWType"/>
+                <EntitySet Name="TRIP_VIEW" EntityType="Connected.app.TRIP_VIEWType"/>
+                <EntitySet Name="DRIVER_VIEW" EntityType="Connected.app.DRIVER_VIEWType"/>
+                <EntitySet Name="FAILURE_VIEW" EntityType="Connected.app.FAILURE_VIEWType"/>
+                <EntitySet Name="TELEMETRY_VIEW" EntityType="Connected.app.TELEMETRY_VIEWType"/>
+                <EntitySet Name="CONSUMPTION_VIEW" EntityType="Connected.app.CONSUMPTION_VIEWType" sap:addressable="false"/>
+                <EntitySet Name="CONSUMPTION" EntityType="Connected.app.CONSUMPTIONType" sap:addressable="false"/>
+                <EntitySet Name="CONSUMPTION_VIEW_NP" EntityType="Connected.app.CONSUMPTION_VIEW_NPType"/>
+                <EntitySet Name="OBD_GPS_VIEW" EntityType="Connected.app.OBD_GPS_VIEWType" sap:addressable="false"/>
+                <EntitySet Name="OBDGPS" EntityType="Connected.app.OBDGPSType" sap:addressable="false"/>
+                <EntitySet Name="VEHICLE_VIEW_WP" EntityType="Connected.app.VEHICLE_VIEW_WPType" sap:addressable="false"/>
+                <EntitySet Name="VEHICLE" EntityType="Connected.app.VEHICLEType" sap:addressable="false"/>
+                <EntitySet Name="KPI_VIEW" EntityType="Connected.app.KPI_VIEWType"/>
+                <EntitySet Name="P_COMPANY" EntityType="Connected.app.P_COMPANYType"/>
+                <EntitySet Name="P_CONNECTION" EntityType="Connected.app.P_CONNECTIONType"/>
+                <EntitySet Name="P_DEALERSHIP" EntityType="Connected.app.P_DEALERSHIPType"/>
+                <EntitySet Name="P_DEVICE" EntityType="Connected.app.P_DEVICEType"/>
+                <EntitySet Name="P_DRIVER" EntityType="Connected.app.P_DRIVERType"/>
+                <EntitySet Name="P_DRIVER_VEHICLE" EntityType="Connected.app.P_DRIVER_VEHICLEType"/>
+                <EntitySet Name="P_FAILURE" EntityType="Connected.app.P_FAILUREType"/>
+                <EntitySet Name="P_FAILURE_DESC" EntityType="Connected.app.P_FAILURE_DESCType"/>
+                <EntitySet Name="P_GPS" EntityType="Connected.app.P_GPSType"/>
+                <EntitySet Name="P_GROUP" EntityType="Connected.app.P_GROUPType"/>
+                <EntitySet Name="P_MESSAGE" EntityType="Connected.app.P_MESSAGEType"/>
+                <EntitySet Name="P_OBD" EntityType="Connected.app.P_OBDType"/>
+                <EntitySet Name="P_OBD_EXT" EntityType="Connected.app.P_OBD_EXTType"/>
+                <EntitySet Name="P_TRIP" EntityType="Connected.app.P_TRIPType"/>
+                <EntitySet Name="P_TRIP_AUX" EntityType="Connected.app.P_TRIP_AUXType"/>
+                <EntitySet Name="P_USER" EntityType="Connected.app.P_USERType"/>
+                <EntitySet Name="P_USER_GROUP" EntityType="Connected.app.P_USER_GROUPType"/>
+                <EntitySet Name="P_VEHICLE_GROUP" EntityType="Connected.app.P_VEHICLE_GROUPType"/>
+                <EntitySet Name="P_VEHICLE_TYPE" EntityType="Connected.app.P_VEHICLE_TYPEType"/>
+                <EntitySet Name="P_ALARM_SETTING" EntityType="Connected.app.P_ALARM_SETTINGType"/>
+                <AssociationSet Name="CONSUMPTION_CONSUMPTION_VIEW" Association="Connected.app.CONSUMPTION_CONSUMPTION_VIEWType">
+                    <End Role="CONSUMPTIONPrincipal" EntitySet="CONSUMPTION"/>
+                    <End Role="CONSUMPTION_VIEWDependent" EntitySet="CONSUMPTION_VIEW"/>
+                </AssociationSet>
+                <AssociationSet Name="OBDGPS_OBD_GPS_VIEW" Association="Connected.app.OBDGPS_OBD_GPS_VIEWType">
+                    <End Role="OBDGPSPrincipal" EntitySet="OBDGPS"/>
+                    <End Role="OBD_GPS_VIEWDependent" EntitySet="OBD_GPS_VIEW"/>
+                </AssociationSet>
+                <AssociationSet Name="VEHICLE_VEHICLE_VIEW_WP" Association="Connected.app.VEHICLE_VEHICLE_VIEW_WPType">
+                    <End Role="VEHICLEPrincipal" EntitySet="VEHICLE"/>
+                    <End Role="VEHICLE_VIEW_WPDependent" EntitySet="VEHICLE_VIEW_WP"/>
+                </AssociationSet>
+                <AssociationSet Name="VEHICLE_VIEW_TRIP_VIEW" Association="Connected.app.VEHICLE_VIEW_TRIP_VIEWType">
+                    <End Role="VEHICLE_VIEWPrincipal" EntitySet="VEHICLE_VIEW"/>
+                    <End Role="TRIP_VIEWDependent" EntitySet="TRIP_VIEW"/>
+                </AssociationSet>
+                <AssociationSet Name="VEHICLE_VIEW_TELEMETRY_VIEW" Association="Connected.app.VEHICLE_VIEW_TELEMETRY_VIEWType">
+                    <End Role="VEHICLE_VIEWPrincipal" EntitySet="VEHICLE_VIEW"/>
+                    <End Role="TELEMETRY_VIEWDependent" EntitySet="TELEMETRY_VIEW"/>
+                </AssociationSet>
+                <AssociationSet Name="VEHICLE_VIEW_FAILURE_VIEW" Association="Connected.app.VEHICLE_VIEW_FAILURE_VIEWType">
+                    <End Role="VEHICLE_VIEWPrincipal" EntitySet="VEHICLE_VIEW"/>
+                    <End Role="FAILURE_VIEWDependent" EntitySet="FAILURE_VIEW"/>
+                </AssociationSet>
+                <AssociationSet Name="VEHICLE_VIEW_CONSUMPTION_VIEW_NP" Association="Connected.app.VEHICLE_VIEW_CONSUMPTION_VIEW_NPType">
+                    <End Role="VEHICLE_VIEWPrincipal" EntitySet="VEHICLE_VIEW"/>
+                    <End Role="CONSUMPTION_VIEW_NPDependent" EntitySet="CONSUMPTION_VIEW_NP"/>
+                </AssociationSet>
+                <AssociationSet Name="VEHICLE_VIEW_DRIVER_VIEW" Association="Connected.app.VEHICLE_VIEW_DRIVER_VIEWType">
+                    <End Role="VEHICLE_VIEWPrincipal" EntitySet="VEHICLE_VIEW"/>
+                    <End Role="DRIVER_VIEWDependent" EntitySet="DRIVER_VIEW"/>
+                </AssociationSet>
+                <AssociationSet Name="VEHICLE_VIEW_P_ALARM_SETTING" Association="Connected.app.VEHICLE_VIEW_P_ALARM_SETTINGType">
+                    <End Role="VEHICLE_VIEWPrincipal" EntitySet="VEHICLE_VIEW"/>
+                    <End Role="P_ALARM_SETTINGDependent" EntitySet="P_ALARM_SETTING"/>
+                </AssociationSet>
+            </EntityContainer>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

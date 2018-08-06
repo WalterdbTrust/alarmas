@@ -1,0 +1,35 @@
+{
+    "application": {
+        "id": "",
+        "title": "alarmas.alarmas",
+        "description": "Seteo de Alarmas",
+        "type": "SAP_UI5_Component",
+        "componentUrl": "/",
+        "appUrl": "#alarmas-Display",
+        "navigationComponentName": "alarmas",
+        "intentSemanticObject": "alarmas",
+        "intentAction": "Display",
+        "html5ApplicationName": "alarmas",
+        "HCPParentApplicationName": ""
+    },
+    "assignment": {
+        "groups": [
+            "Grupo3"
+        ],
+        "contentPackages": [
+            "Catalogo3"
+        ],
+        "categories": []
+    },
+    "tile": {
+        "type": "StaticTile",
+        "title": "Alarmas",
+        "subtitle": "Seteo de Alarmas",
+        "searchKeywords": "Alarmas,Seteo de Alarmas",
+        "displayIconUrl": "sap-icon://alert",
+        "displayInfoText": "",
+        "size": "1x1",
+        "serviceURL": "",
+        "refreshInterval": ""
+    }
+}
